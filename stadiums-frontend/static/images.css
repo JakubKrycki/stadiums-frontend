@@ -1,0 +1,5 @@
+.background-landing-page-image {
+    background-image: url("./stadium-background.jpeg");
+    background-position: "center";
+    background-size: cover;
+}
