@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import WelcomeNavigator from "../../lib/WelcomeHeader.svelte";
 	import RegisterForm from "./RegisterForm.svelte";
 </script>
