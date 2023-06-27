@@ -6,7 +6,7 @@ import type { UserRequestDto } from "./account-types";
 export const accountService = {
 	baseUrl: "http://lap:3000",
 	productionUrl: "https://stadiums.onrender.com",
-	production: false,
+	production: true,
 
 	getUrl() {
 		return this.production ? this.productionUrl : this.baseUrl;
