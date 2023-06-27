@@ -7,7 +7,7 @@ export const placemarkService = {
     
     baseUrl: "http://lap:3000",
 	productionUrl: "https://stadiums.onrender.com",
-	production: false,
+	production: true,
 
 	getUrl() {
 		return this.production ? this.productionUrl : this.baseUrl;
