@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Header from "$lib/Header.svelte";
-	import type { Placemark } from "../../services/placemark-types";
+	import type { PlacemarkReadable } from "../../services/placemark-types";
 	import PlacemarkListingCard from "../../lib/PlacemarkListingCard.svelte";
 	import PlacemarkDetailView from "../../lib/PlacemarkDetailView.svelte";
 	import { placemarkService } from "../../services/placemark-service";
@@ -8,12 +8,12 @@
 	import PlacemarkCreateView from "$lib/PlacemarkCreateView.svelte";
 
     export let data: PageData;
-    let placemarks: Placemark[] = data.placemarks;
-    let selectedPlacemark: Placemark;
+    let placemarks: PlacemarkReadable[] = data.placemarks;
+    let selectedPlacemark: PlacemarkReadable;
     let isChanged = true;
     let isCreatorOpen = false;
 
-    function selectPlacemark(placemark: Placemark) {
+    function selectPlacemark(placemark: PlacemarkReadable) {
         selectedPlacemark = placemark;
         isCreatorOpen = false;
     }
@@ -49,7 +49,7 @@
         {#if isCreatorOpen}
         <PlacemarkCreateView token={data.token} bind:isCreatorOpen bind:isChanged />
         {:else if selectedPlacemark}
-        <PlacemarkDetailView placemark={selectedPlacemark} bind:isChanged userToken={data.token} />
+        <PlacemarkDetailView placemark={selectedPlacemark} bind:isChanged editable={true} />
         {/if}
     </div>
     
