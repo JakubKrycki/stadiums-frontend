@@ -16,7 +16,7 @@
 
 <Header />
 
-<section class="columns is-full  mx-6">
+<section class="columns is-full mx-6">
     <div class="column is-half mt-6 pt-5">
         <div class="columns is-full is-multiline">
         {#each data.placemarks as placemark}

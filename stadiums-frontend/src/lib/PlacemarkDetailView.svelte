@@ -42,11 +42,11 @@
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Latitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} disabled={!editMode}/></div>
+        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} type="number" disabled={!editMode}/></div>
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Longitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} disabled={!editMode}/></div>
+        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} type="number" disabled={!editMode}/></div>
     </div>
     {#if !editable}
     <div class='block'>
