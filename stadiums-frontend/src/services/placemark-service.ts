@@ -1,7 +1,7 @@
 import axios from "axios";
 import { loggedInUser } from "../stores"
 import { accountService } from "./account-service"
-import type { Placemark } from "./placemark-types";
+import type { Placemark, PlacemarkPlus } from "./placemark-types";
 
 export const placemarkService = {
     
@@ -25,16 +25,16 @@ export const placemarkService = {
 
     async createPlacemark(placemark: Placemark) {
         try {
-			axios.post(`${this.getUrl()}/api/placemarks`, placemark);
+			await axios.post(`${this.getUrl()}/api/placemarks`, placemark);
 			return true;
 		} catch (error) {
 			return false;
 		}
     },
     
-    async updatePlacemark(placemark: Placemark) {
+    async updatePlacemark(placemark: PlacemarkPlus) {
         try {
-			await axios.put(`${this.getUrl()}/api/placemarks`, placemark);
+			await axios.put(`${this.getUrl()}/api/placemarks/${placemark._id}`, placemark);
 			return true;
 		} catch (error) {
 			return false;
