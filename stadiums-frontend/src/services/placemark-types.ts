@@ -2,8 +2,8 @@ export interface Placemark {
     name: string;
     team: string;
     added_by: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
     category: string;
     private: boolean;
 };
@@ -12,8 +12,8 @@ export interface PlacemarkPlus {
     name: string;
     team: string;
     added_by: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
     category: string;
     private: boolean;
     _id: string;
@@ -24,8 +24,8 @@ export interface PlacemarkReadable {
     team: string;
     added_by: string;
     added_by_username: string;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
     category: string;
     private: boolean;
     _id: string;

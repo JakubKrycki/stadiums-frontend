@@ -1,12 +1,31 @@
 <script lang="ts">
 	import Header from "$lib/Header.svelte";
+	import LeafletMap from "$lib/LeafletMap.svelte";
+	import { onMount } from "svelte";
 	import { accountService } from "../../services/account-service";
-	import type { PageData } from "./$types";
+	import { getMarkerLayer } from "../../services/placemark-utils";
+	import { placemarkService } from "../../services/placemark-service";
 
-	export let data: PageData
-	const userEMail = accountService.getUserEMail(data.token);
+	let map: LeafletMap;
+
+	onMount(async () => {
+		accountService.checkPageRefresh();
+		const accountCredentials = localStorage.account;
+		let token = '';
+		if (accountCredentials) {
+			const savedUser = JSON.parse(accountCredentials);
+			token = savedUser.token;
+		}
+		const donations = await placemarkService.getAllPlacemarksVisibleForUser(token);
+		const donationMarkerLayer = getMarkerLayer(donations);
+		map.populateLayer(donationMarkerLayer);
+	});
 </script>
 
 <Header />
 
-<p class="is-size-3 mt-6 pt-6">Logged user: {userEMail}</p>
+<section class="mt-6 pt-2">
+	<section class="mt-6">
+		<LeafletMap bind:this={map} />
+	</section>
+</section>

@@ -10,8 +10,8 @@
         name: '',
         team: '',
         added_by: accountService.getUserId(token),
-        latitude: '',
-        longitude: '',
+        latitude: 0,
+        longitude: 0,
         category: '',
         private: false,
     };
@@ -47,11 +47,11 @@
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Latitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} required/></div>
+        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} type="number" required/></div>
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Longitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} required/></div>
+        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} type="number" required/></div>
     </div>
     <div class='block columns'>
         <div class="column">

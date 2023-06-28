@@ -1,7 +1,7 @@
 import axios from "axios";
 import { loggedInUser } from "../stores"
 import { accountService } from "./account-service"
-import type { Placemark, PlacemarkPlus } from "./placemark-types";
+import type { Placemark, PlacemarkPlus, PlacemarkReadable } from "./placemark-types";
 
 export const placemarkService = {
     
@@ -19,7 +19,7 @@ export const placemarkService = {
         return response.data;
     },
 
-    async getAllPlacemarksVisibleForUser(token: string) {
+    async getAllPlacemarksVisibleForUser(token: string): Promise<PlacemarkReadable[]> {
         const userId = accountService.getUserId(token);
         const response = await axios.get(`${this.getUrl()}/api/placemarks/user/${userId}`);
         return response.data;
