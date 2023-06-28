@@ -1,15 +1,15 @@
 <script lang='ts'>
-	import { accountService } from "../services/account-service";
 	import { placemarkService } from "../services/placemark-service";
-    import type { Placemark } from "../services/placemark-types";
+    import type { PlacemarkReadable } from "../services/placemark-types";
+    import { toPlacemarkPlus } from "../services/placemark-types";
 
     let editMode = false;
-    export let placemark: Placemark;
-    export let userToken: string;
+    export let placemark: PlacemarkReadable;
     export let isChanged: boolean;
+    export let editable: boolean;
 
     async function updatePlacemark() {
-        let success = await placemarkService.updatePlacemark(placemark);
+        let success = await placemarkService.updatePlacemark(toPlacemarkPlus(placemark));
 		if (success) {
             editMode = false;
             isChanged = true;
@@ -18,10 +18,12 @@
 </script>
 
 <div class='pl-5 pt-4 is-size-5'>
-    <div class='block '>
+    {#if editable}
+    <div class='block'>
         <button class={"button is-size-7 is-rounded " + (editMode ? "is-info is-light" : "is-active")} on:click={() => {editMode = !editMode}}>Edit mode</button>
         <button class={"button is-size-7 is-rounded " + (editMode ? "is-info is-light" : "is-hidden")} on:click={() => updatePlacemark()}>Save</button>
     </div>
+    {/if}
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Name:</div>
         <div><input class="input is-rounded is-vcentered" bind:value={placemark.name} disabled={!editMode}/></div>
@@ -46,9 +48,9 @@
         <div class="column is-3 is-vcentered">Longitude:</div>
         <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} disabled={!editMode}/></div>
     </div>
-    {#if accountService.getUserId(userToken) != placemark.added_by}
+    {#if !editable}
     <div class='block'>
-        <span>Added by: {accountService.getUserEMail(userToken)}</span>
+        <span>Added by: {placemark.added_by_username}</span>
     </div>
     {/if}
 

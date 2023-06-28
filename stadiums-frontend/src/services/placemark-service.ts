@@ -19,6 +19,12 @@ export const placemarkService = {
         return response.data;
     },
 
+    async getAllPlacemarksVisibleForUser(token: string) {
+        const userId = accountService.getUserId(token);
+        const response = await axios.get(`${this.getUrl()}/api/placemarks/user/${userId}`);
+        return response.data;
+    },
+
     async getPlacemarksByAdmin() {
         loggedInUser.subscribe((data) => console.log(data));
     },

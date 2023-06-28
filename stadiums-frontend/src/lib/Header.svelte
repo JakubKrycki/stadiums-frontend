@@ -10,6 +10,11 @@
 				</a>
 			</button>
 			<button class="navbar-item button is-link is-inverted is-rounded is-size-4 m-auto">
+				<a href="/placemarks" class="m-auto has-text-black">
+					ALL PLACEMARKS
+				</a>
+			</button>
+			<button class="navbar-item button is-link is-inverted is-rounded is-size-4 m-auto">
 				<a href="/my-placemarks" class="m-auto has-text-black">
 					MY PLACEMARKS
 				</a>
