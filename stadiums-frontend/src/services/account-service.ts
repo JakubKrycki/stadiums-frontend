@@ -68,18 +68,18 @@ export const accountService = {
 		}
 	},
 
-	getUserRole(token: string) {
+	getUserRole(token: string): string {
 		const decoded = jose.decodeJwt(token);
-		return decoded.role;
+		return decoded.role as string;
 	},
 
-	getUserEMail(token: string) {
+	getUserEMail(token: string): string {
 		const decoded = jose.decodeJwt(token);
-		return decoded.email;
+		return decoded.email as string;
 	},
 
-	getUserId(token: string) {
+	getUserId(token: string): string {
 		const decoded = jose.decodeJwt(token);
-		return decoded.id;
+		return decoded.id as string;
 	}
 };

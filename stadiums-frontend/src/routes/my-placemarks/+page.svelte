@@ -5,14 +5,17 @@
 	import PlacemarkDetailView from "../../lib/PlacemarkDetailView.svelte";
 	import { placemarkService } from "../../services/placemark-service";
 	import type { PageData } from "./$types";
+	import PlacemarkCreateView from "$lib/PlacemarkCreateView.svelte";
 
     export let data: PageData;
     let placemarks: Placemark[] = data.placemarks;
     let selectedPlacemark: Placemark;
     let isChanged = true;
+    let isCreatorOpen = false;
 
     function selectPlacemark(placemark: Placemark) {
         selectedPlacemark = placemark;
+        isCreatorOpen = false;
     }
 
     async function reload() {
@@ -38,14 +41,16 @@
         <span>No placemarks for now!</span>
         {/each}
         </div>
-		<button class="is-flex button is-info is-rounded is-size-5">
+		<button class="is-flex button is-info is-rounded is-size-5" on:click={() => isCreatorOpen = !isCreatorOpen}>
 			<p class="column has-text-white is-size-5">+ Create Placemark</p>
 		</button>
     </div>
     <div class="column is-half hero is-fullheight-with-navbar mt-6 pt-6 box">
-        {#if selectedPlacemark}
-            <PlacemarkDetailView placemark={selectedPlacemark} bind:isChanged userToken={data.token} />
-        {/if}  
+        {#if isCreatorOpen}
+        <PlacemarkCreateView token={data.token} bind:isCreatorOpen bind:isChanged />
+        {:else if selectedPlacemark}
+        <PlacemarkDetailView placemark={selectedPlacemark} bind:isChanged userToken={data.token} />
+        {/if}
     </div>
     
 </section>
