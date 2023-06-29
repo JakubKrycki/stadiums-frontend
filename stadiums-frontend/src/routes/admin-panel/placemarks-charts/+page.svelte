@@ -10,7 +10,15 @@
     export let data: PageData;
     const role = getUserRole(data.token);
     let loaded = false;
-    let chartData = {
+    let chartDataByCategory = {
+        labels: [""],
+            datasets: [
+                {
+                    values: [0]
+                }
+            ]
+    };
+    let chartDataByPrivacy = {
         labels: [""],
             datasets: [
                 {
@@ -21,12 +29,22 @@
 
     onMount(async () => {
         const placemarks = await placemarkService.getPlacemarks();
-        const placemarksMap = await getNumberOfEachByAttribute(placemarks, 'category');
-        chartData = {
-            labels: Array.from(placemarksMap.keys()),
+        const placemarksMapByCategory = await getNumberOfEachByAttribute(placemarks, 'category');
+        const placemarksMapByPrivacy = await getNumberOfEachByAttribute(placemarks, 'private');
+        const privateLabels = Array.from(placemarksMapByPrivacy.keys()).map((value) => value === "True" ? "Private" : "Public");
+        chartDataByCategory = {
+            labels: Array.from(placemarksMapByCategory.keys()),
             datasets: [
                 {
-                    values: Array.from(placemarksMap.values())
+                    values: Array.from(placemarksMapByCategory.values())
+                }
+            ]
+        };
+        chartDataByPrivacy = {
+            labels: privateLabels,
+            datasets: [
+                {
+                    values: Array.from(placemarksMapByPrivacy.values())
                 }
             ]
         };
@@ -38,23 +56,42 @@
 {#if role === "ADMIN"}
 <Header isAdmin={role}/>
 
-<section class="columns pt-6 mt-6 is-multiline">
+<section class="columns mt-6 pt-3 is-multiline">
     <div class="column is-full">
-        <div class="box has-text-centered mt-6 mb-6">
-            <p class="is-size-3">Number of placemarks from countries</p>
+        <div class="box has-text-centered">
+            <p class="is-size-3">Number of placemarks by countries</p>
         </div>
     </div>
     <div class="column is-half is-vcentered">
         <div class="box">
             {#if loaded}
-            <Chart data={chartData} type="bar" />
+            <Chart data={chartDataByCategory} type="bar" />
             {/if}
         </div>
     </div>
     <div class="column is-half is-vcentered">
         <div class="box">
             {#if loaded}
-            <Chart data={chartData} type="pie" />
+            <Chart data={chartDataByCategory} type="pie" />
+            {/if}
+        </div>
+    </div>
+    <div class="column is-full">
+        <div class="box has-text-centered">
+            <p class="is-size-3">Number of placemarks by privacy</p>
+        </div>
+    </div>
+    <div class="column is-half is-vcentered">
+        <div class="box">
+            {#if loaded}
+            <Chart data={chartDataByPrivacy} type="bar" />
+            {/if}
+        </div>
+    </div>
+    <div class="column is-half is-vcentered">
+        <div class="box">
+            {#if loaded}
+            <Chart data={chartDataByPrivacy} type="pie" />
             {/if}
         </div>
     </div>
