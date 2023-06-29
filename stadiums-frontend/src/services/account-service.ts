@@ -1,20 +1,15 @@
 import axios from "axios";
-import * as jose from 'jose';
 import { loggedInUser } from "../stores";
 import type { UserRequestDto } from "./account-types";
+import { getUrl } from "$lib/consts";
 
 export const accountService = {
 	baseUrl: "http://lap:3000",
 	productionUrl: "https://stadiums.onrender.com",
-	production: true,
-
-	getUrl() {
-		return this.production ? this.productionUrl : this.baseUrl;
-	},
 
 	async login(email: string, password: string): Promise<boolean> {
 		try {
-			const response = await axios.post(`${this.getUrl()}/api/users/authenticate`, { email, password });
+			const response = await axios.post(`${getUrl()}/api/users/authenticate`, { email, password });
 			axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.token;
 			if (response.data.success) {
 				loggedInUser.set({
@@ -46,7 +41,7 @@ export const accountService = {
 
 	async signup(user: UserRequestDto): Promise<boolean> {
 		try {
-			await axios.post(this.getUrl() + "/api/users", user);
+			await axios.post(getUrl() + "/api/users", user);
 			return true;
 		} catch (error) {
 			return false;
@@ -67,19 +62,4 @@ export const accountService = {
 			}
 		}
 	},
-
-	getUserRole(token: string): string {
-		const decoded = jose.decodeJwt(token);
-		return decoded.role as string;
-	},
-
-	getUserEMail(token: string): string {
-		const decoded = jose.decodeJwt(token);
-		return decoded.email as string;
-	},
-
-	getUserId(token: string): string {
-		const decoded = jose.decodeJwt(token);
-		return decoded.id as string;
-	}
 };

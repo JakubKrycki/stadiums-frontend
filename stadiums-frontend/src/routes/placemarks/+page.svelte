@@ -4,6 +4,7 @@
 	import PlacemarkListingCard from "../../lib/PlacemarkListingCard.svelte";
 	import PlacemarkDetailView from "../../lib/PlacemarkDetailView.svelte";
 	import type { PageData } from "./$types";
+	import { getUserRole } from "../../services/user-utils";
 
     export let data: PageData;
     let selectedPlacemark: PlacemarkReadable;
@@ -14,7 +15,7 @@
 </script>
 
 
-<Header />
+<Header isAdmin={getUserRole(data.token)}/>
 
 <section class="columns is-full mx-6">
     <div class="column is-half mt-6 pt-5">
@@ -22,7 +23,11 @@
         {#each data.placemarks as placemark}
         <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
         {:else}
-        <span>No placemarks for now!</span>
+        <div class="pt-6">
+            <span class="is-size-4">No stadiums :(</span>
+            <br />
+            <span class="is-size-4">Be first and add one!</span>
+        </div>
         {/each}
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { accountService } from "../../services/account-service";
+import { accountService } from "../../../services/account-service";
 export const ssr = false;
 
 export const load = async () => {
@@ -10,7 +10,6 @@ export const load = async () => {
         const savedUser = JSON.parse(accountCredentials);
         token = savedUser.token;
     }
-
 	return {
         token: token,
 	};
