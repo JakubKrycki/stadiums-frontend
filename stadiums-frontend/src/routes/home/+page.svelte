@@ -5,7 +5,10 @@
 	import { accountService } from "../../services/account-service";
 	import { getMarkerLayer } from "../../services/placemark-utils";
 	import { placemarkService } from "../../services/placemark-service";
+	import type { PageData } from "./$types";
+	import { getUserRole } from "../../services/user-utils";
 
+    export let data: PageData;
 	let map: LeafletMap;
 
 	onMount(async () => {
@@ -22,7 +25,7 @@
 	});
 </script>
 
-<Header />
+<Header isAdmin={getUserRole(data.token)}/>
 
 <section class="mt-6 pt-2">
 	<section class="mt-6">

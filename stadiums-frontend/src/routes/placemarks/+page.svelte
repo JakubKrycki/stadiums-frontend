@@ -4,6 +4,7 @@
 	import PlacemarkListingCard from "../../lib/PlacemarkListingCard.svelte";
 	import PlacemarkDetailView from "../../lib/PlacemarkDetailView.svelte";
 	import type { PageData } from "./$types";
+	import { getUserRole } from "../../services/user-utils";
 
     export let data: PageData;
     let selectedPlacemark: PlacemarkReadable;
@@ -14,7 +15,7 @@
 </script>
 
 
-<Header />
+<Header isAdmin={getUserRole(data.token)}/>
 
 <section class="columns is-full mx-6">
     <div class="column is-half mt-6 pt-5">

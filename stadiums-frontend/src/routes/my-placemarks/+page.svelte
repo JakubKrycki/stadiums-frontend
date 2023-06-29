@@ -6,6 +6,7 @@
 	import { placemarkService } from "../../services/placemark-service";
 	import type { PageData } from "./$types";
 	import PlacemarkCreateView from "$lib/PlacemarkCreateView.svelte";
+	import { getUserRole } from "../../services/user-utils";
 
     export let data: PageData;
     let placemarks: PlacemarkReadable[] = data.placemarks;
@@ -30,7 +31,7 @@
 </script>
 
 
-<Header />
+<Header isAdmin={getUserRole(data.token)}/>
 
 <section class="columns is-full  mx-6">
     <div class="column is-half mt-6 pt-5">
