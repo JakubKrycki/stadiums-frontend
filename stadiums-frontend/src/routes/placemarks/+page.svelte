@@ -23,7 +23,11 @@
         {#each data.placemarks as placemark}
         <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
         {:else}
-        <span>No placemarks for now!</span>
+        <div class="pt-6">
+            <span class="is-size-4">No stadiums :(</span>
+            <br />
+            <span class="is-size-4">Be first and add one!</span>
+        </div>
         {/each}
         </div>
     </div>

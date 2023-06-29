@@ -1,7 +1,7 @@
 <script lang='ts'>
-	import { accountService } from "../services/account-service";
 	import { placemarkService } from "../services/placemark-service";
     import type { Placemark } from "../services/placemark-types";
+	import { getUserEMail, getUserId } from "../services/user-utils";
 
     export let token: string;
     export let isCreatorOpen: boolean;
@@ -9,7 +9,7 @@
     const placemark: Placemark = {
         name: '',
         team: '',
-        added_by: accountService.getUserId(token),
+        added_by: getUserId(token),
         latitude: 0,
         longitude: 0,
         category: '',
@@ -27,7 +27,7 @@
 <form on:submit|preventDefault={create}>
 <div class='pl-5 pt-4 is-size-5'>
     <div class='block'>
-        <span>Added by: {accountService.getUserEMail(token)}</span>
+        <span>Added by: {getUserEMail(token)}</span>
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Name:</div>
@@ -47,11 +47,11 @@
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Latitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} type="number" required/></div>
+        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} type="number" step="0.01" required/></div>
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Longitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} type="number" required/></div>
+        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} type="number" step="0.01" required/></div>
     </div>
     <div class='block columns'>
         <div class="column">

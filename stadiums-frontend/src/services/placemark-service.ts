@@ -47,7 +47,7 @@ export const placemarkService = {
 
     async deletePlacemark(id: string) {
         try {
-			const response = await axios.delete(`${getUrl()}/api/placemark/${id}`);
+			const response = await axios.delete(`${getUrl()}/api/placemarks/${id}`);
 			return response.status == 204;
 		} catch (error) {
 			console.log(error);

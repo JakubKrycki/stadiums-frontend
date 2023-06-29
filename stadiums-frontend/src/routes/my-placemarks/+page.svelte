@@ -39,7 +39,11 @@
         {#each placemarks as placemark}
         <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
         {:else}
-        <span>No placemarks for now!</span>
+        <div class="pt-6">
+            <span class="is-size-4">You have no stadiums :(</span>
+            <br />
+            <span class="is-size-4">Add one!</span>
+        </div>
         {/each}
         </div>
 		<button class="is-flex button is-info is-rounded is-size-5" on:click={() => isCreatorOpen = !isCreatorOpen}>
