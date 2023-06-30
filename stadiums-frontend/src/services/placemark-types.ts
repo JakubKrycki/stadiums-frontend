@@ -43,3 +43,14 @@ export function toPlacemarkPlus(placemark: PlacemarkReadable) {
         _id: placemark._id,
     }
 }
+
+export interface Image {
+    placemark_id: string;
+    image_url: string;
+}
+
+export interface ImagePlus {
+    placemark_id: string;
+    image_url: string;
+    _id: string;
+}

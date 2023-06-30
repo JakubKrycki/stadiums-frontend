@@ -55,4 +55,34 @@ export const placemarkService = {
 		}
     },
 
+    async uploadImage(id: string, image_url: string) {
+        try {
+            const response = await axios.post(`${getUrl()}/api/placemarks/${id}/images`, { image_url });
+            return response.status === 200;
+        } catch (error) {
+            console.log(error);
+			return false;
+        }
+    },
+
+    async getImages(id: string) {
+        try {
+            const response = await axios.get(`${getUrl()}/api/placemarks/${id}/images`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+			return false;
+        }
+    },
+
+    async deleteImage(placemarkId: string, imageId: string) {
+        try {
+			const response = await axios.delete(`${getUrl()}/api/placemarks/${placemarkId}/images/${imageId}`);
+			return response.status == 204;
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
+    }
+
 }
