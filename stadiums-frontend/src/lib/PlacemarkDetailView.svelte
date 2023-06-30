@@ -39,67 +39,139 @@
             weather.weatherIcon = "fas fa-solid fa-cloud-rain";
         } 
     }
-
+    
     $: url && placemarkService.uploadImage(placemark._id, url);
     $: placemark && getWeather();
 </script>
 
-<div class='pl-5 pt-4 is-size-5'>
-    {#if editable}
-    <div class='block'>
-        <button class={"button is-size-7 is-rounded " + (editMode ? "is-info is-light" : "is-active")} on:click={() => {editMode = !editMode}}>Edit mode</button>
-        <button class={"button is-size-7 is-rounded " + (editMode ? "is-info is-light" : "is-hidden")} on:click={() => updatePlacemark()}>Save</button>
-    </div>
-    {/if}
-    <div class='block columns is-vcentered'>
-        <div class="column is-3 is-vcentered">Name:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.name} disabled={!editMode}/></div>
-    </div>
-    <div class='block columns is-vcentered'>
-        <div class="column is-3 is-vcentered">Team:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.team} disabled={!editMode}/></div>
-    </div>
-    <div class='block columns is-vcentered'>
-        <div class="column is-3 is-vcentered">Country:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.category} disabled={!editMode}/></div>
-    </div>
-    <div class='block columns is-vcentered'>
-        <div class="column is-3 is-vcentered">Private:</div>
-        <div class="column"><input class="checkbox" type="checkbox" bind:checked={placemark.private} disabled={!editMode}/></div>
-    </div>
-    <div class='block columns is-vcentered'>
-        <div class="column is-3 is-vcentered">Latitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} type="number" disabled={!editMode}/></div>
-    </div>
-    <div class='block columns is-vcentered'>
-        <div class="column is-3 is-vcentered">Longitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} type="number" disabled={!editMode}/></div>
-    </div>
-    {#if !editable}
-    <div class='block'>
-        <span>Added by: {placemark.added_by_username}</span>
-    </div>
-    {/if}
-    <div class='block'>
+<div class="columns is-full is-centered is-vcentered">
+    <div class="column is-10 is-centered mt-6">
         {#if editable}
-        <UploadWidget bind:url />
+        <div class='field is-horizontal'>
+            <div class="field-label"></div>
+            <div class="field-body">
+                <div class="field">
+                    <button class={"button is-size-7 is-rounded " + (editMode ? "is-info is-light" : "is-active")} on:click={() => {editMode = !editMode}}>Edit mode</button>
+                    <button class={"button is-size-7 is-rounded " + (editMode ? "is-info is-light" : "is-hidden")} on:click={() => updatePlacemark()}>Save</button>
+                </div>
+            </div>
+        </div>
         {/if}
-        <button class="button is-info is-rounded is-small" on:click={goToGallery}>See images</button>
-    </div>
-    {#if weather != null}
-    <div class='block'>
-        <div>
-            <span class="icon-text is-size-4">
-                Weather: {weather.weatherText}&nbsp;
-                <span class="icon">
-                    <i class={weather.weatherIcon}></i>
-                </span>
-            </span>
-            
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Name:</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-rounded" bind:value={placemark.name} disabled={!editMode}/>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>
-            <span class="is-size-4">Temperature: {weather.temperature} &#8451</span>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Team:</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-rounded" bind:value={placemark.team} disabled={!editMode}/>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Country:</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-rounded" bind:value={placemark.category} disabled={!editMode}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label">
+                <label class="label">Private:</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="checkbox" type="checkbox" bind:checked={placemark.private} disabled={!editMode}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Latitude:</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-rounded" bind:value={placemark.latitude} type="number" disabled={!editMode}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">Longitude:</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                    <div class="control">
+                        <input class="input is-rounded" bind:value={placemark.longitude} type="number" disabled={!editMode}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#if !editable}
+        <div class='field is-horizontal'>
+            <div class="field-label">
+                <label class="label">Add:</label>
+            </div>
+            <div class="field-body">
+                <label class="label">{placemark.added_by_username}</label>
+            </div>
+        </div>
+        {/if}
+        <div class='field is-horizontal'>
+            <div class="field-label"></div>
+            <div class="field-body">
+                <div class="field">
+                    {#if editable}
+                    <UploadWidget bind:url />
+                    {/if}
+                    <button class="button is-info is-rounded is-small" on:click={goToGallery}>See images</button>
+                </div>
+            </div>
+        </div>
+        {#if weather != null}
+        <div class='field is-horizontal'>
+            <div class="field-label"><label class="label">Weather:</label></div>
+            <div class="field-body">
+                <div class="field">
+                    <span class="icon-text">
+                        <span class="icon">
+                            <i class={weather.weatherIcon}></i>
+                        </span>
+                        &nbsp;{weather.weatherText}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class='field is-horizontal'>
+            <div class="field-label"><label class="label">Temperature:</label></div>
+            <div class="field-body">
+                <div class="field">
+                    {weather.temperature} &#8451
+                </div>
+            </div>
+        </div>
+        {/if}
     </div>
-    {/if}
 </div>

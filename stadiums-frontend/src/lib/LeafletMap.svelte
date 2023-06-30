@@ -6,7 +6,7 @@
     import { markerSelected } from "../stores";
 
     export let id = "home-map-id";
-    export let height = 80;
+    export let height = 75;
     export let location = { lat: 53.2734, lng: -7.7783203 };
     export let zoom = 5;
     export let minZoom = 3;

@@ -24,6 +24,7 @@
         }
     }
 </script>
+
 <form on:submit|preventDefault={create}>
 <div class='pl-5 pt-4 is-size-5'>
     <div class='block'>

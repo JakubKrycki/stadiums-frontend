@@ -4,17 +4,12 @@
 </script>
 
 <WelcomeNavigator />
-
-<section class="columns is-full is-vcentered is-centered">
-	<div class="column is-three-quaters has-text-centered">
-		<img alt="Chelsea London F.C. stadium" src="/stadium-background.jpeg" />
-	</div>
-	<div class="column is-one-quater hero is-fullheight">
-		<div class="hero-body">
-			<div class="container">
-				<h1 class="title is-size-3 has-text-centered">Login</h1>
+<div class="hero-body">
+	<div class="container has-text-centered">
+		<div class="columns is-centered">
+            <div class="column is-two-fifths">
 				<RegisterForm />
-			</div>
-		</div>
+            </div>
+        </div>
 	</div>
-</section>
+</div>

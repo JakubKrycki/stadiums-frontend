@@ -19,25 +19,29 @@
 
 
 <Header isAdmin={getUserRole(data.token)}/>
-
-<section class="columns is-full mx-6">
-    <div class="column is-half mt-6 pt-5">
-        <div class="columns is-full is-multiline">
-        {#each data.placemarks as placemark}
-        <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
-        {:else}
-        <div class="pt-6">
-            <span class="is-size-4">No stadiums :(</span>
-            <br />
-            <span class="is-size-4">Be first and add one!</span>
-        </div>
-        {/each}
+<div class="hero-body is-fullheight">
+	<div class="container is-fluid" style="height: 35vw;">
+		<div class="columns">
+            <div class="column is-1"></div>
+            <div class="column is-5">
+                <div class="columns is-full is-multiline">
+                {#each data.placemarks as placemark}
+                <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
+                {:else}
+                <div>
+                    <span class="is-size-4">No stadiums :(</span>
+                    <br />
+                    <span class="is-size-4">Be first and add one!</span>
+                </div>
+                {/each}
+                </div>
+            </div>
+            {#if selectedPlacemark}
+            <div class="column is-1"></div>
+            <div class="column is-4 box" style="height: 35vw;">
+                <PlacemarkDetailView placemark={selectedPlacemark} isChanged={false} editable={false} />
+            </div>
+            {/if}
         </div>
     </div>
-    <div class="column is-half hero is-fullheight-with-navbar mt-6 pt-6 box">
-        {#if selectedPlacemark}
-        <PlacemarkDetailView placemark={selectedPlacemark} isChanged={false} editable={false} />
-        {/if}
-    </div>
-    
-</section>
+</div>
