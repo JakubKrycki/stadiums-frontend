@@ -7,6 +7,7 @@
 
     let editMode = false;
     let url = "";
+    let weather: any = null;
     export let placemark: PlacemarkReadable;
     export let isChanged: boolean;
     export let editable: boolean;
@@ -28,7 +29,19 @@
         }
     }
 
+    async function getWeather() {
+        weather = await placemarkService.getConditions(placemark.latitude, placemark.longitude);
+        if (weather.weatherText === "Cloudy" || weather.weatherText === "Mostly cloudy") {
+            weather.weatherIcon = "fas fa-solid fa-cloud";
+        } else if (weather.weatherText === "Sunny") {
+            weather.weatherIcon = "fas fa-solid fa-sun";
+        } else if (weather.weatherText === "Light rain" || weather.weatherText === "Rain") {
+            weather.weatherIcon = "fas fa-solid fa-cloud-rain";
+        } 
+    }
+
     $: url && placemarkService.uploadImage(placemark._id, url);
+    $: placemark && getWeather();
 </script>
 
 <div class='pl-5 pt-4 is-size-5'>
@@ -66,13 +79,27 @@
     <div class='block'>
         <span>Added by: {placemark.added_by_username}</span>
     </div>
-    {:else}
-    <div class='block'>
-        <UploadWidget bind:url />
-    </div>
     {/if}
     <div class='block'>
+        {#if editable}
+        <UploadWidget bind:url />
+        {/if}
         <button class="button is-info is-rounded is-small" on:click={goToGallery}>See images</button>
     </div>
-
+    {#if weather != null}
+    <div class='block'>
+        <div>
+            <span class="icon-text is-size-4">
+                Weather: {weather.weatherText}&nbsp;
+                <span class="icon">
+                    <i class={weather.weatherIcon}></i>
+                </span>
+            </span>
+            
+        </div>
+        <div>
+            <span class="is-size-4">Temperature: {weather.temperature} &#8451</span>
+        </div>
+    </div>
+    {/if}
 </div>

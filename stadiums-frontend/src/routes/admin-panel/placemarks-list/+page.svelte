@@ -30,7 +30,7 @@
                         <th>Name</th>
                         <th>Team</th>
                         <th><abbr title="Latitude">Lat</abbr></th>
-                        <th><abbr title="Longitude">Lon</abbr></th>
+                        <th><abbr title="Longitude">Lng</abbr></th>
                         <th class="has-text-centered">Category</th>
                         <th class="has-text-centered">Private</th>
                         <th>Added by</th>
