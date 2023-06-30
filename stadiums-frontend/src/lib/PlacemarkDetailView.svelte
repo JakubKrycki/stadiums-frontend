@@ -1,9 +1,12 @@
 <script lang='ts'>
+	import { goto } from "$app/navigation";
 	import { placemarkService } from "../services/placemark-service";
     import type { PlacemarkReadable } from "../services/placemark-types";
     import { toPlacemarkPlus } from "../services/placemark-types";
+	import UploadWidget from "./UploadWidget.svelte";
 
     let editMode = false;
+    let url = "";
     export let placemark: PlacemarkReadable;
     export let isChanged: boolean;
     export let editable: boolean;
@@ -15,6 +18,17 @@
             isChanged = true;
 		}
     }
+
+    function goToGallery() {
+        localStorage.selectedPlacemark = JSON.stringify({ placemark_id: placemark._id });
+        if (editable) {
+            goto("/my-placemarks/gallery");
+        } else {
+            goto("/placemarks/gallery");
+        }
+    }
+
+    $: url && placemarkService.uploadImage(placemark._id, url);
 </script>
 
 <div class='pl-5 pt-4 is-size-5'>
@@ -52,6 +66,13 @@
     <div class='block'>
         <span>Added by: {placemark.added_by_username}</span>
     </div>
+    {:else}
+    <div class='block'>
+        <UploadWidget bind:url />
+    </div>
     {/if}
+    <div class='block'>
+        <button class="button is-info is-rounded is-small" on:click={goToGallery}>See images</button>
+    </div>
 
 </div>

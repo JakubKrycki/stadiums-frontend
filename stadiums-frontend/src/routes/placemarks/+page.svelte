@@ -7,11 +7,14 @@
 	import { getUserRole } from "../../services/user-utils";
 
     export let data: PageData;
+    let placemarks: PlacemarkReadable[] = data.placemarks;
     let selectedPlacemark: PlacemarkReadable;
 
     function selectPlacemark(placemark: PlacemarkReadable) {
         selectedPlacemark = placemark;
     }
+
+    $: placemarks;
 </script>
 
 
