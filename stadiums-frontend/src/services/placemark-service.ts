@@ -3,6 +3,8 @@ import type { Placemark, PlacemarkPlus, PlacemarkReadable } from "./placemark-ty
 import { getUrl } from "$lib/consts";
 import { getUserId } from "./user-utils";
 
+const apiKey = "0FUorPTYRMEAYoAruSnWfd4zKwMfcrBN";
+
 export const placemarkService = {
 
     async getPlacemarksByUser(token: string) {
@@ -83,6 +85,34 @@ export const placemarkService = {
 			console.log(error);
 			return false;
 		}
-    }
+    },
 
+    async getConditions(lat: number, lng: number) {
+        const locationKeyUrl = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat},${lng}`;
+        let locationKey = '';
+        await fetch(locationKeyUrl, {
+            mode: 'cors'
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            locationKey = data.Key;
+        });
+        const conditionsUrl = `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}`
+        let weather = {};
+        await fetch(conditionsUrl, {
+            mode: 'cors'
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            weather = {
+                weatherText: data[0].WeatherText,
+                temperature: data[0].Temperature.Metric.Value
+            }
+        });
+        return weather;
+    }
 }

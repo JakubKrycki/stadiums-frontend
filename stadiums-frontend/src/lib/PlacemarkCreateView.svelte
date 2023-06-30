@@ -47,11 +47,11 @@
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Latitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} type="number" step="0.01" required/></div>
+        <div><input class="input is-rounded is-vcentered" bind:value={placemark.latitude} type="number" step="0.0001" required/></div>
     </div>
     <div class='block columns is-vcentered'>
         <div class="column is-3 is-vcentered">Longitude:</div>
-        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} type="number" step="0.01" required/></div>
+        <div><input class="input is-rounded is-vcentered" bind:value={placemark.longitude} type="number" step="0.0001" required/></div>
     </div>
     <div class='block columns'>
         <div class="column">
