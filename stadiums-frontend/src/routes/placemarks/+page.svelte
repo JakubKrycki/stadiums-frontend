@@ -24,7 +24,7 @@
 		<div class="columns">
             <div class="column is-1"></div>
             <div class="column is-5">
-                <div class="columns is-full is-multiline">
+                <div class="columns is-full is-multiline" style="height: 37vw; overflow-y: scroll;">
                 {#each data.placemarks as placemark}
                 <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
                 {:else}

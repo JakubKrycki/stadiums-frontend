@@ -31,11 +31,11 @@
 
     async function getWeather() {
         weather = await placemarkService.getConditions(placemark.latitude, placemark.longitude);
-        if (weather.weatherText === "Cloudy" || weather.weatherText === "Mostly cloudy") {
+        if (weather.weatherText === "Clouds") {
             weather.weatherIcon = "fas fa-solid fa-cloud";
-        } else if (weather.weatherText === "Sunny") {
+        } else if (weather.weatherText === "Mist" || weather.weatherText === "Clear") {
             weather.weatherIcon = "fas fa-solid fa-sun";
-        } else if (weather.weatherText === "Light rain" || weather.weatherText === "Rain") {
+        } else if (weather.weatherText === "Rain") {
             weather.weatherIcon = "fas fa-solid fa-cloud-rain";
         } 
     }

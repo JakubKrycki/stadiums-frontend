@@ -21,8 +21,8 @@
 <Header isAdmin={role}/>
 <div class="hero-body hero">
     <div class="columns">
-        <div class="column is-full">
-            <div class="table-container ">
+        <div class="column is-full" style="height: 36vw; overflow-y: scroll;">
+            <div class="table-container">
                 <table class="table is-hoverable is-fullwidth">
                     <thead>
                         <tr>

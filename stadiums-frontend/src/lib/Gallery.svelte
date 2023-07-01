@@ -27,8 +27,4 @@
             </div>
         </button>
     </div>
-    {:else}
-    <div class="pt-6">
-        <span class="is-size-4">No images here</span>
-    </div>
 {/if}

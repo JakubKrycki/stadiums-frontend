@@ -3,7 +3,7 @@ import type { Placemark, PlacemarkPlus, PlacemarkReadable } from "./placemark-ty
 import { getUrl } from "$lib/consts";
 import { getUserId } from "./user-utils";
 
-const apiKey = "0FUorPTYRMEAYoAruSnWfd4zKwMfcrBN";
+const apiKey = "934481b1a6ec04ee4aa6ac91745488a6";
 
 export const placemarkService = {
 
@@ -88,20 +88,9 @@ export const placemarkService = {
     },
 
     async getConditions(lat: number, lng: number) {
-        const locationKeyUrl = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${lat},${lng}`;
-        let locationKey = '';
-        await fetch(locationKeyUrl, {
-            mode: 'cors'
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data) => {
-            locationKey = data.Key;
-        });
-        const conditionsUrl = `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${apiKey}`
+        const weatherInfo = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=metric&appid=${apiKey}`
         let weather = {};
-        await fetch(conditionsUrl, {
+        await fetch(weatherInfo, {
             mode: 'cors'
         })
         .then((response) => {
@@ -109,8 +98,8 @@ export const placemarkService = {
         })
         .then((data) => {
             weather = {
-                weatherText: data[0].WeatherText,
-                temperature: data[0].Temperature.Metric.Value
+                weatherText: data.current.weather[0].main,
+                temperature: data.current.temp
             }
         });
         return weather;

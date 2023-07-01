@@ -37,15 +37,16 @@
 		<div class="columns">
             <div class="column is-1"></div>
             <div class="column is-5">
-                <div class="columns is-full is-multiline">
+                <button class="is-flex button is-info is-rounded is-size-5" on:click={() => isCreatorOpen = !isCreatorOpen}>
+                    <p class="column has-text-white is-size-5">+ Create Placemark</p>
+                </button>
+                <div class="columns mt-2 is-full is-multiline" style="height: 31vw; overflow-y: scroll;">
                 {#each placemarks as placemark}
                 <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
                 {/each}
                 </div>
-                <button class="is-flex button is-info is-rounded is-size-5" on:click={() => isCreatorOpen = !isCreatorOpen}>
-                    <p class="column has-text-white is-size-5">+ Create Placemark</p>
-                </button>
             </div>
+            {#if isCreatorOpen || selectedPlacemark}
             <div class="column is-1"></div>
             <div class="column is-4 box" style="height: 35vw;">
                 {#if isCreatorOpen}
@@ -54,6 +55,7 @@
                 <PlacemarkDetailView placemark={selectedPlacemark} bind:isChanged editable={true} />
                 {/if}
             </div>
+            {/if}
         </div>
     </div>
 </div>
