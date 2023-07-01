@@ -32,30 +32,30 @@
 
 
 <Header isAdmin={getUserRole(data.token)}/>
-
-<section class="columns is-full  mx-6">
-    <div class="column is-half mt-6 pt-5">
-        <div class="columns is-full is-multiline">
-        {#each placemarks as placemark}
-        <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
-        {:else}
-        <div class="pt-6">
-            <span class="is-size-4">You have no stadiums :(</span>
-            <br />
-            <span class="is-size-4">Add one!</span>
+<div class="hero-body is-fullheight">
+	<div class="container is-fluid" style="height: 35vw;">
+		<div class="columns">
+            <div class="column is-1"></div>
+            <div class="column is-5">
+                <button class="is-flex button is-info is-rounded is-size-5" on:click={() => isCreatorOpen = !isCreatorOpen}>
+                    <p class="has-text-white is-size-5">+ Create Placemark</p>
+                </button>
+                <div class="columns mt-2 is-full is-multiline"  style="max-height: 31vw; overflow-y: scroll;">
+                {#each placemarks as placemark}
+                <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
+                {/each}
+                </div>
+            </div>
+            {#if isCreatorOpen || selectedPlacemark}
+            <div class="column is-1"></div>
+            <div class="column is-4 box" style="height: 35vw;">
+                {#if isCreatorOpen}
+                <PlacemarkCreateView token={data.token} bind:isCreatorOpen bind:isChanged />
+                {:else if selectedPlacemark}
+                <PlacemarkDetailView placemark={selectedPlacemark} bind:isChanged editable={true} />
+                {/if}
+            </div>
+            {/if}
         </div>
-        {/each}
-        </div>
-		<button class="is-flex button is-info is-rounded is-size-5" on:click={() => isCreatorOpen = !isCreatorOpen}>
-			<p class="column has-text-white is-size-5">+ Create Placemark</p>
-		</button>
     </div>
-    <div class="column is-half hero is-fullheight-with-navbar mt-6 pt-6 box">
-        {#if isCreatorOpen}
-        <PlacemarkCreateView token={data.token} bind:isCreatorOpen bind:isChanged />
-        {:else if selectedPlacemark}
-        <PlacemarkDetailView placemark={selectedPlacemark} bind:isChanged editable={true} />
-        {/if}
-    </div>
-    
-</section>
+</div>

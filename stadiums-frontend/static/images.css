@@ -1,5 +1,22 @@
-.background-landing-page-image {
-    background-image: url("./stadium-background.jpeg");
-    background-position: "center";
+.background-image {
+    background-image: url("./background.png");
+    background-position-x: center;
+    background-position-y: 100%;
     background-size: cover;
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 6px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: hsl(206, 70%, 96%);
+    border-radius: 6px;
+  }

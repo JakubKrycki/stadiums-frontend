@@ -32,15 +32,19 @@
 
 {#if loaded}
 <Header isAdmin={getUserRole(token)}/>
-<div class="columns is-full is-multiline pt-4 mt-6 is-vcentered">
-    <div class="column is-full">
-        <a href="/placemarks" class="is-size-4 has-text-weight-medium has-text-black">
-			<div class="icon">
-				<i class="fas fa-solid fa-chevron-left"></i>
-			</div>
-			Back my placemarks
-		</a>
+<div class="hero-body is-fullheight">
+	<div class="container is-fluid" style="height: 35vw;">
+        <div class="columns is-full is-multiline is-vcentered">
+            <div class="column is-full">
+                <a href="/placemarks" class="is-size-5 has-text-weight-medium has-text-black  has-background-info-light button is-rounded">
+                    <div class="icon">
+                        <i class="fas fa-solid fa-chevron-left"></i>
+                    </div>
+                    &nbsp;Back to all placemarks
+                </a>
+            </div>
+            <Gallery images={images} />
+        </div>
     </div>
-    <Gallery images={images} />
 </div>
 {/if}

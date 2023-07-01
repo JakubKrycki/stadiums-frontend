@@ -20,16 +20,12 @@
 
 <form on:submit|preventDefault={login}>
 	<div class="field is-size-3">
-		<label class="label is-size-5" for="username">Email</label>
-		<input bind:value={email} class="input is-size-6 is-rounded" id="email" name="email" placeholder="Enter email" type="email" />
+		<input bind:value={email} class="input is-size-6 is-rounded" id="email" name="email" placeholder="Email" type="email" />
 	</div>
 	<div class="field">
-		<label class="label is-size-5" for="password">Password</label>
-		<input bind:value={password} class="input is-size-6 is-rounded" id="password" name="password" placeholder="Enter Password" type="password" />
+		<input bind:value={password} class="input is-size-6 is-rounded" id="password" name="password" placeholder="Password" type="password" />
 	</div>
-	<div class="field">
-		<button class="button is-link is-size-5 is-rounded">Log In</button>
-	</div>
+	<button class="button is-link is-size-5 is-rounded">Login</button>
 </form>
 {#if errorMessage}
 	<div class="section">

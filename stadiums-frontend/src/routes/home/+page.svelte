@@ -26,9 +26,8 @@
 </script>
 
 <Header isAdmin={getUserRole(data.token)}/>
-
-<section class="mt-6 pt-2">
-	<section class="mt-6">
+<div class="hero-body">
+	<div class="container has-text-centered">
 		<LeafletMap bind:this={map} />
-	</section>
-</section>
+	</div>
+</div>

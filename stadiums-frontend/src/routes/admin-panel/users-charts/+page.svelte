@@ -41,33 +41,40 @@
 
 {#if role === "ADMIN"}
 <Header isAdmin={role}/>
-
-<section class="columns pt-6 mt-6 is-multiline is-centered">
-    <div class="column is-full">
-        <div class="box has-text-centered mt-6 mb-6">
-            <p class="is-size-3">Number of users with roles</p>
-        </div>
-    </div>
-    <div class="column is-3">
-        <div class="control">
-            <label class="label is-size-6" for="chart-type">Chart type</label>
-            <div class="select is-size-6 is-fullwidth is-rounded">
-                <select bind:value={selectedChartType}>
-                    {#each chartTypes as chartType}
-                        <option>{chartType}</option>
-                    {/each}
-                </select>
+<div class="hero-body is-fullheight">
+	<div class="container is-fluid" style="height: 35vw;">
+        <div class="columns is-multiline is-centered">
+            <div class="column is-8">
+                <div class="box has-text-centered my-6">
+                    <p class="is-size-3">Number of users with roles</p>
+                </div>
+            </div>
+            <div class="column is-full is-centered is-vcentered">
+                <div class="columns is-centered is-vcentered">
+                    <div class="column is-2 box is-vcentered">
+                        <div class="control">
+                            <label class="label is-size-6" for="chart-type">Chart type</label>
+                            <div class="select is-size-6 is-fullwidth is-rounded">
+                                <select bind:value={selectedChartType}>
+                                    {#each chartTypes as chartType}
+                                        <option>{chartType}</option>
+                                    {/each}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-half is-vcentered is-centered">
+                        <div class="box">
+                            {#if loaded}
+                            {#key selectedChartType}
+                            <Chart data={chartData} type={selectedChartType} />
+                            {/key}
+                            {/if}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="column is-half is-vcentered is-centered">
-        <div class="box">
-            {#if loaded}
-            {#key selectedChartType}
-            <Chart data={chartData} type={selectedChartType} />
-            {/key}
-            {/if}
-        </div>
-    </div>
-</section>
+</div>
 {/if}

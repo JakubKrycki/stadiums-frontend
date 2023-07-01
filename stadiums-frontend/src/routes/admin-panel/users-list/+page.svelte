@@ -19,41 +19,42 @@
 
 {#if role === "ADMIN"}
 <Header isAdmin={role}/>
-
-<section class="columns pt-6 mt-5">
-    <div class="column is-full">
-        <div class="table-container ">
-            <table class="table is-hoverable is-fullwidth">
-                <thead>
-                    <tr>
-                    <th>Id</th>
-                    <th>First name</th>
-                    <th>Last name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th class="has-text-centered">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {#each data.users as user}
-                    <tr>
-                        <th>{user._id}</th>
-                        <td>{user.firstName}</td>
-                        <td>{user.lastName}</td>
-                        <td>{user.email}</td>
-                        <td>{user.role}</td>
-                        <td class="has-text-centered">
-                            <button on:click={() => deleteUser(user._id)}>
-                                <span class="icon has-text-danger">
-                                    <i class="fas fa-solid fa-trash"></i>
-                                </span>
-                            </button>
-                        </td>
-                    </tr>
-                    {/each}
-                </tbody>
-            </table>
+<div class="hero-body hero">
+    <div class="columns">
+        <div class="column is-full" style="height: 36vw; overflow-y: scroll;">
+            <div class="table-container">
+                <table class="table is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                        <th>Id</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th class="has-text-centered">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#each data.users as user}
+                        <tr>
+                            <th>{user._id}</th>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.email}</td>
+                            <td>{user.role}</td>
+                            <td class="has-text-centered">
+                                <button on:click={() => deleteUser(user._id)}>
+                                    <span class="icon has-text-danger">
+                                        <i class="fas fa-solid fa-trash"></i>
+                                    </span>
+                                </button>
+                            </td>
+                        </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</section>
+</div>
 {/if}

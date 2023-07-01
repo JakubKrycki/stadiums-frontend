@@ -1,6 +1,6 @@
 <script lang="ts">
 </script>
 
-<div class="container">
+<section class="hero is-fullheight background-image">
 	<slot />
-</div>
+</section>
