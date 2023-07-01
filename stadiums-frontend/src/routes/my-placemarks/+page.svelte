@@ -38,9 +38,9 @@
             <div class="column is-1"></div>
             <div class="column is-5">
                 <button class="is-flex button is-info is-rounded is-size-5" on:click={() => isCreatorOpen = !isCreatorOpen}>
-                    <p class="column has-text-white is-size-5">+ Create Placemark</p>
+                    <p class="has-text-white is-size-5">+ Create Placemark</p>
                 </button>
-                <div class="columns mt-2 is-full is-multiline" style="height: 31vw; overflow-y: scroll;">
+                <div class="columns mt-2 is-full is-multiline"  style="max-height: 31vw; overflow-y: scroll;">
                 {#each placemarks as placemark}
                 <PlacemarkListingCard placemark={placemark} on:click={() => selectPlacemark(placemark)} />
                 {/each}
